@@ -1,0 +1,23 @@
+{
+  "type": "record",
+  "name": "HappinessAverage",
+  "namespace": "com.greatit.demo.avro",
+  "doc": "Average value of items produced by Happiness machine in time window",
+  "fields": [
+      {
+      "name": "total",
+      "type": "double",
+      "doc": "total amount of produced happiness by Happiness machine in time window"
+    },
+    {
+      "name": "num_of_produced",
+      "type": "long",
+      "doc":"how many items were produced by Happiness machine in time window"
+    },
+    {
+      "name": "avg_of_produced",
+      "type": "double",
+      "doc":"avg of produced happiness items in time window"
+    }
+  ]
+}

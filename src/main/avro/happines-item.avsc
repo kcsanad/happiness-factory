@@ -1,0 +1,29 @@
+{
+  "type": "record",
+  "name": "HappinessItem",
+  "namespace": "com.greatit.demo.avro",
+  "doc": "Item produced by the Happiness machine",
+  "fields": [
+    {
+      "name": "id",
+      "type": {
+        "type": "string",
+        "avro.java.string": "String"
+      },
+      "doc": "Id of a happiness item "
+    },
+    {
+      "name": "datetime",
+      "type": {
+        "type": "string",
+        "avro.java.string": "String"
+      },
+      "doc": "Time when happiness was made"
+    },
+    {
+      "name": "level",
+      "type": "int",
+      "doc": "How strong this happiness is?"
+    }
+  ]
+}
