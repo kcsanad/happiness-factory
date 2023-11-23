@@ -7,6 +7,8 @@ import com.greatit.demo.avro.HappinessItem;
 import com.greatit.demo.rest.HappinessResource;
 
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
+import net.sourceforge.argparse4j.ArgumentParsers;
+import net.sourceforge.argparse4j.inf.ArgumentParser;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serde;
@@ -23,6 +25,7 @@ import org.apache.kafka.streams.state.KeyValueStore;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

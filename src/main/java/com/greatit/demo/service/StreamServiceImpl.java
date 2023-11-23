@@ -18,13 +18,13 @@ import jakarta.ws.rs.NotFoundException;
 public class StreamServiceImpl implements StreamService {
 
     @Override
-    public String getHello(String name, KafkaStreams streams) {
+    public String getHello(String key, KafkaStreams streams) {
          ReadOnlyKeyValueStore<String, HappinessAverage> store = streams.store(StoreQueryParameters.fromNameAndType("stream-converted-to-table", QueryableStoreTypes.keyValueStore()));
         if (store == null) {
             throw new NotFoundException();
         }
 
-        final HappinessAverage value = store.get("KEY1");
+        final HappinessAverage value = store.get(key);
         if (value == null) {
             throw new NotFoundException();
         }

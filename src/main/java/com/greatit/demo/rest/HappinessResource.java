@@ -25,9 +25,9 @@ public class HappinessResource {
     private StreamService streamService;
 
 
-    @Path("/{name}")
+    @Path("/{key}")
     @GET
-    public String hello(@PathParam("name") String name) {
-        return streamService.getHello(name, streams);
+    public String hello(@PathParam("key") String key) {
+        return streamService.getHello(key, streams);
     }
 }
