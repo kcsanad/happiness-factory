@@ -47,6 +47,14 @@ public class TopicCreation {
                         config.getNumber("output.topic.replication.factor").shortValue())
         );
 
+        topics.put(
+                config.getString("output.table.topic.name"),
+                new NewTopic(
+                        config.getString("output.table.topic.name"),
+                        config.getNumber("output.table.topic.partitions").intValue(),
+                        config.getNumber("output.table.topic.replication.factor").shortValue())
+        );
+
         try {
             logger.info("Starting the topics creation");
 

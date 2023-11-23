@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+import com.greatit.demo.avro.HappinessAverage;
 import com.greatit.demo.avro.HappinessItem;
 import io.confluent.kafka.schemaregistry.avro.AvroSchema;
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
@@ -31,6 +32,17 @@ public class SchemaPublication {
             schemaRegistryClient.register(
                 String.format("%s-value", config.getString("input.topic.name")),
                 new AvroSchema(HappinessItem.SCHEMA$)
+            );
+        } catch (IOException | RestClientException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            logger.info(String.format("Schemas publication at: %s", registryUrl));
+
+            schemaRegistryClient.register(
+                String.format("%s-value", config.getString("input.topic.name")),
+                new AvroSchema(HappinessAverage.SCHEMA$)
             );
         } catch (IOException | RestClientException e) {
             e.printStackTrace();

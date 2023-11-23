@@ -15,10 +15,10 @@ import org.apache.avro.message.SchemaStore;
 /** Average value of items produced by Happiness machine in time window */
 @org.apache.avro.specific.AvroGenerated
 public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1361295845309283867L;
+  private static final long serialVersionUID = -6265715898178832936L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"HappinessAverage\",\"namespace\":\"com.greatit.demo.avro\",\"doc\":\"Average value of items produced by Happiness machine in time window\",\"fields\":[{\"name\":\"total\",\"type\":\"double\",\"doc\":\"total amount of produced happiness by Happiness machine in time window\"},{\"name\":\"num_of_produced\",\"type\":\"long\",\"doc\":\"how many items were produced by Happiness machine in time window\"},{\"name\":\"avg_of_produced\",\"type\":\"double\",\"doc\":\"avg of produced happiness items in time window\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"HappinessAverage\",\"namespace\":\"com.greatit.demo.avro\",\"doc\":\"Average value of items produced by Happiness machine in time window\",\"fields\":[{\"name\":\"total\",\"type\":\"double\",\"doc\":\"total amount of produced happiness by Happiness machine in time window\"},{\"name\":\"num_of_produced\",\"type\":\"long\",\"doc\":\"how many items were produced by Happiness machine in time window\"},{\"name\":\"avg_of_produced\",\"type\":\"double\",\"doc\":\"avg of produced happiness items in time window\"},{\"name\":\"datetime\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"Time when last KTable operation happened\",\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -80,6 +80,8 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
   private long num_of_produced;
   /** avg of produced happiness items in time window */
   private double avg_of_produced;
+  /** Time when last KTable operation happened */
+  private java.lang.String datetime;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -93,11 +95,13 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
    * @param total total amount of produced happiness by Happiness machine in time window
    * @param num_of_produced how many items were produced by Happiness machine in time window
    * @param avg_of_produced avg of produced happiness items in time window
+   * @param datetime Time when last KTable operation happened
    */
-  public HappinessAverage(java.lang.Double total, java.lang.Long num_of_produced, java.lang.Double avg_of_produced) {
+  public HappinessAverage(java.lang.Double total, java.lang.Long num_of_produced, java.lang.Double avg_of_produced, java.lang.String datetime) {
     this.total = total;
     this.num_of_produced = num_of_produced;
     this.avg_of_produced = avg_of_produced;
+    this.datetime = datetime;
   }
 
   @Override
@@ -113,6 +117,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
     case 0: return total;
     case 1: return num_of_produced;
     case 2: return avg_of_produced;
+    case 3: return datetime;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -125,6 +130,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
     case 0: total = (java.lang.Double)value$; break;
     case 1: num_of_produced = (java.lang.Long)value$; break;
     case 2: avg_of_produced = (java.lang.Double)value$; break;
+    case 3: datetime = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -184,6 +190,24 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
   }
 
   /**
+   * Gets the value of the 'datetime' field.
+   * @return Time when last KTable operation happened
+   */
+  public java.lang.String getDatetime() {
+    return datetime;
+  }
+
+
+  /**
+   * Sets the value of the 'datetime' field.
+   * Time when last KTable operation happened
+   * @param value the value to set.
+   */
+  public void setDatetime(java.lang.String value) {
+    this.datetime = value;
+  }
+
+  /**
    * Creates a new HappinessAverage RecordBuilder.
    * @return A new HappinessAverage RecordBuilder
    */
@@ -230,6 +254,8 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
     private long num_of_produced;
     /** avg of produced happiness items in time window */
     private double avg_of_produced;
+    /** Time when last KTable operation happened */
+    private java.lang.String datetime;
 
     /** Creates a new Builder */
     private Builder() {
@@ -254,6 +280,10 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
         this.avg_of_produced = data().deepCopy(fields()[2].schema(), other.avg_of_produced);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
+      if (isValidValue(fields()[3], other.datetime)) {
+        this.datetime = data().deepCopy(fields()[3].schema(), other.datetime);
+        fieldSetFlags()[3] = other.fieldSetFlags()[3];
+      }
     }
 
     /**
@@ -273,6 +303,10 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       if (isValidValue(fields()[2], other.avg_of_produced)) {
         this.avg_of_produced = data().deepCopy(fields()[2].schema(), other.avg_of_produced);
         fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.datetime)) {
+        this.datetime = data().deepCopy(fields()[3].schema(), other.datetime);
+        fieldSetFlags()[3] = true;
       }
     }
 
@@ -405,6 +439,50 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       return this;
     }
 
+    /**
+      * Gets the value of the 'datetime' field.
+      * Time when last KTable operation happened
+      * @return The value.
+      */
+    public java.lang.String getDatetime() {
+      return datetime;
+    }
+
+
+    /**
+      * Sets the value of the 'datetime' field.
+      * Time when last KTable operation happened
+      * @param value The value of 'datetime'.
+      * @return This builder.
+      */
+    public com.greatit.demo.avro.HappinessAverage.Builder setDatetime(java.lang.String value) {
+      validate(fields()[3], value);
+      this.datetime = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'datetime' field has been set.
+      * Time when last KTable operation happened
+      * @return True if the 'datetime' field has been set, false otherwise.
+      */
+    public boolean hasDatetime() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'datetime' field.
+      * Time when last KTable operation happened
+      * @return This builder.
+      */
+    public com.greatit.demo.avro.HappinessAverage.Builder clearDatetime() {
+      datetime = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public HappinessAverage build() {
@@ -413,6 +491,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
         record.total = fieldSetFlags()[0] ? this.total : (java.lang.Double) defaultValue(fields()[0]);
         record.num_of_produced = fieldSetFlags()[1] ? this.num_of_produced : (java.lang.Long) defaultValue(fields()[1]);
         record.avg_of_produced = fieldSetFlags()[2] ? this.avg_of_produced : (java.lang.Double) defaultValue(fields()[2]);
+        record.datetime = fieldSetFlags()[3] ? this.datetime : (java.lang.String) defaultValue(fields()[3]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -451,6 +530,14 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
 
     out.writeDouble(this.avg_of_produced);
 
+    if (this.datetime == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.datetime);
+    }
+
   }
 
   @Override public void customDecode(org.apache.avro.io.ResolvingDecoder in)
@@ -464,8 +551,15 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
 
       this.avg_of_produced = in.readDouble();
 
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.datetime = null;
+      } else {
+        this.datetime = in.readString();
+      }
+
     } else {
-      for (int i = 0; i < 3; i++) {
+      for (int i = 0; i < 4; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.total = in.readDouble();
@@ -477,6 +571,15 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
 
         case 2:
           this.avg_of_produced = in.readDouble();
+          break;
+
+        case 3:
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.datetime = null;
+          } else {
+            this.datetime = in.readString();
+          }
           break;
 
         default:

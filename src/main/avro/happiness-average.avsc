@@ -18,6 +18,18 @@
       "name": "avg_of_produced",
       "type": "double",
       "doc":"avg of produced happiness items in time window"
+    },
+    {
+      "name": "datetime",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "avro.java.string": "String"
+        }
+      ],
+      "default": null,
+      "doc": "Time when last KTable operation happened"
     }
   ]
 }
