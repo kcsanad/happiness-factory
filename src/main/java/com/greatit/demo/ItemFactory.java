@@ -7,8 +7,6 @@ import com.greatit.demo.avro.HappinessItem;
 import com.greatit.demo.rest.HappinessResource;
 
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
-import net.sourceforge.argparse4j.ArgumentParsers;
-import net.sourceforge.argparse4j.inf.ArgumentParser;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serde;
@@ -111,7 +109,7 @@ public class ItemFactory {
         }
 
         // Starts Grizzly HTTP server
-        public static HttpServer startServer(KafkaStreams streams) {
+        public static HttpServer startServer(KafkaStreams streams, String apiURL) {
 
                 HappinessResource happinessResource = new HappinessResource(streams);
 
@@ -126,7 +124,7 @@ public class ItemFactory {
 
                 logger.info("Starting Server........");
 
-                final HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), config);
+                final HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(URI.create(apiURL), config);
 
                 return httpServer;
 
@@ -154,14 +152,20 @@ public class ItemFactory {
                                                 config.getDuration("window.grace.period"))
                                 .advanceBy(config.getDuration("window.size"));
 
-                Topology topology = buildTopology(config, windows, happinessItemSerde, happinessAverageSerde, formatter);
+                Topology topology = buildTopology(
+                        config, 
+                        windows, 
+                        happinessItemSerde, 
+                        happinessAverageSerde, 
+                        formatter
+                );
 
                 final KafkaStreams streams = new KafkaStreams(topology, properties);
 
                 //
                 //
                 //
-                final HttpServer httpServer = startServer(streams);
+                final HttpServer httpServer = startServer(streams, config.getString("rest.api.url"));
 
                 // add jvm shutdown hook
                 Runtime.getRuntime().addShutdownHook(new Thread(() -> {
