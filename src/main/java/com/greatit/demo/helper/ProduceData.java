@@ -75,9 +75,10 @@ public class ProduceData {
 
             while (cycle) {
                 logger.info("starting...");
-                avroRecord.put(HappinessItem.SCHEMA$.getFields().get(0).name(), UUID.randomUUID().toString());
-                avroRecord.put(HappinessItem.SCHEMA$.getFields().get(1).name(), ZonedDateTime.now().format(formatter));
-                avroRecord.put(HappinessItem.SCHEMA$.getFields().get(2).name(), (int) ((Math.random() * (happinessMaxVal - happinessMinVal)) + happinessMinVal));
+                avroRecord.put(HappinessItem.SCHEMA$.getFields().get(0).name(), happinessType.toString());
+                avroRecord.put(HappinessItem.SCHEMA$.getFields().get(1).name(), UUID.randomUUID().toString());
+                avroRecord.put(HappinessItem.SCHEMA$.getFields().get(2).name(), ZonedDateTime.now().format(formatter));
+                avroRecord.put(HappinessItem.SCHEMA$.getFields().get(3).name(), (int) ((Math.random() * (happinessMaxVal - happinessMinVal)) + happinessMinVal));
 
                 ProducerRecord<Object, Object> record = new ProducerRecord<>(config.getString("input.topic.name"), happinessType, avroRecord);
                 producer.send(record);

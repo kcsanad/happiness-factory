@@ -2,6 +2,7 @@ package com.greatit.demo;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
+
 import com.greatit.demo.avro.HappinessAverage;
 import com.greatit.demo.avro.HappinessItem;
 import com.greatit.demo.rest.HappinessResource;
@@ -20,6 +21,7 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.*;
 import org.apache.kafka.streams.state.KeyValueStore;
+import static org.apache.kafka.streams.kstream.Suppressed.BufferConfig.unbounded;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -28,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URI;
+import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -68,20 +71,25 @@ public class ItemFactory {
                 String tableOutputTopic = config.getString("output.table.topic.name");
 
                 Consumed<String, HappinessItem> consumedItem = Consumed
-                                .with(Serdes.String(), happinessItemSerde)
-                                .withTimestampExtractor(new ItemDatetimeExtractor(config));
+                                .with(Serdes.String(), happinessItemSerde);
+                                //.withTimestampExtractor(new ItemDatetimeExtractor(config));
 
                 final Serde<String> stringSerde = Serdes.String();
 
+                Grouped<String, HappinessItem> happinessItemGrp = Grouped.with(Serdes.String(), happinessItemSerde);
+
                 final KStream<String, HappinessAverage> stream = builder
                                 .stream(inputTopic, consumedItem)
-                                .groupByKey()
+                                .selectKey((key, value) -> value.getGroupid())
+                                .groupByKey(happinessItemGrp)
                                 .windowedBy(windows)
                                 .aggregate(HappinessAverage::new, (k, tr, ave) -> {
                                         ave.setNumOfProduced(ave.getNumOfProduced() + 1);
                                         ave.setTotal(ave.getTotal() + tr.getLevel());
+                                        ave.setGroupid(k);
                                         return ave;
                                 }, Materialized.with(Serdes.String(), happinessAverageSerde))
+                                .suppress(Suppressed.untilWindowCloses(unbounded()))
                                 .toStream()
                                 .map((Windowed<String> key, HappinessAverage finalHappinessAverageSerde) -> {
                                         double aveNoFormat = finalHappinessAverageSerde.getTotal()
@@ -89,6 +97,7 @@ public class ItemFactory {
                                         finalHappinessAverageSerde.setAvgOfProduced(
                                                         Double.parseDouble(String.format("%.2f", aveNoFormat)));
                                         finalHappinessAverageSerde.setDatetime(ZonedDateTime.now().format(formatter));
+                                        finalHappinessAverageSerde.setGroupid(key.key());
                                         return new KeyValue<>(key.key(), finalHappinessAverageSerde);
                                 });
 
@@ -154,7 +163,7 @@ public class ItemFactory {
 
                 Topology topology = buildTopology(
                         config, 
-                        windows, 
+                        windows,
                         happinessItemSerde, 
                         happinessAverageSerde, 
                         formatter

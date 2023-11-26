@@ -15,10 +15,10 @@ import org.apache.avro.message.SchemaStore;
 /** Average value of items produced by Happiness machine in time window */
 @org.apache.avro.specific.AvroGenerated
 public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6265715898178832936L;
+  private static final long serialVersionUID = 4524687491415968141L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"HappinessAverage\",\"namespace\":\"com.greatit.demo.avro\",\"doc\":\"Average value of items produced by Happiness machine in time window\",\"fields\":[{\"name\":\"total\",\"type\":\"double\",\"doc\":\"total amount of produced happiness by Happiness machine in time window\"},{\"name\":\"num_of_produced\",\"type\":\"long\",\"doc\":\"how many items were produced by Happiness machine in time window\"},{\"name\":\"avg_of_produced\",\"type\":\"double\",\"doc\":\"avg of produced happiness items in time window\"},{\"name\":\"datetime\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"Time when last KTable operation happened\",\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"HappinessAverage\",\"namespace\":\"com.greatit.demo.avro\",\"doc\":\"Average value of items produced by Happiness machine in time window\",\"fields\":[{\"name\":\"groupid\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"GroupId of a happiness item \",\"default\":null},{\"name\":\"total\",\"type\":\"double\",\"doc\":\"total amount of produced happiness by Happiness machine in time window\"},{\"name\":\"num_of_produced\",\"type\":\"long\",\"doc\":\"how many items were produced by Happiness machine in time window\"},{\"name\":\"avg_of_produced\",\"type\":\"double\",\"doc\":\"avg of produced happiness items in time window\"},{\"name\":\"datetime\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"Time when last KTable operation happened\",\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -74,6 +74,8 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
     return DECODER.decode(b);
   }
 
+  /** GroupId of a happiness item  */
+  private java.lang.String groupid;
   /** total amount of produced happiness by Happiness machine in time window */
   private double total;
   /** how many items were produced by Happiness machine in time window */
@@ -92,12 +94,14 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
 
   /**
    * All-args constructor.
+   * @param groupid GroupId of a happiness item 
    * @param total total amount of produced happiness by Happiness machine in time window
    * @param num_of_produced how many items were produced by Happiness machine in time window
    * @param avg_of_produced avg of produced happiness items in time window
    * @param datetime Time when last KTable operation happened
    */
-  public HappinessAverage(java.lang.Double total, java.lang.Long num_of_produced, java.lang.Double avg_of_produced, java.lang.String datetime) {
+  public HappinessAverage(java.lang.String groupid, java.lang.Double total, java.lang.Long num_of_produced, java.lang.Double avg_of_produced, java.lang.String datetime) {
+    this.groupid = groupid;
     this.total = total;
     this.num_of_produced = num_of_produced;
     this.avg_of_produced = avg_of_produced;
@@ -114,10 +118,11 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
   @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return total;
-    case 1: return num_of_produced;
-    case 2: return avg_of_produced;
-    case 3: return datetime;
+    case 0: return groupid;
+    case 1: return total;
+    case 2: return num_of_produced;
+    case 3: return avg_of_produced;
+    case 4: return datetime;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -127,12 +132,31 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: total = (java.lang.Double)value$; break;
-    case 1: num_of_produced = (java.lang.Long)value$; break;
-    case 2: avg_of_produced = (java.lang.Double)value$; break;
-    case 3: datetime = value$ != null ? value$.toString() : null; break;
+    case 0: groupid = value$ != null ? value$.toString() : null; break;
+    case 1: total = (java.lang.Double)value$; break;
+    case 2: num_of_produced = (java.lang.Long)value$; break;
+    case 3: avg_of_produced = (java.lang.Double)value$; break;
+    case 4: datetime = value$ != null ? value$.toString() : null; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  /**
+   * Gets the value of the 'groupid' field.
+   * @return GroupId of a happiness item 
+   */
+  public java.lang.String getGroupid() {
+    return groupid;
+  }
+
+
+  /**
+   * Sets the value of the 'groupid' field.
+   * GroupId of a happiness item 
+   * @param value the value to set.
+   */
+  public void setGroupid(java.lang.String value) {
+    this.groupid = value;
   }
 
   /**
@@ -248,6 +272,8 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<HappinessAverage>
     implements org.apache.avro.data.RecordBuilder<HappinessAverage> {
 
+    /** GroupId of a happiness item  */
+    private java.lang.String groupid;
     /** total amount of produced happiness by Happiness machine in time window */
     private double total;
     /** how many items were produced by Happiness machine in time window */
@@ -268,21 +294,25 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
      */
     private Builder(com.greatit.demo.avro.HappinessAverage.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.total)) {
-        this.total = data().deepCopy(fields()[0].schema(), other.total);
+      if (isValidValue(fields()[0], other.groupid)) {
+        this.groupid = data().deepCopy(fields()[0].schema(), other.groupid);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.num_of_produced)) {
-        this.num_of_produced = data().deepCopy(fields()[1].schema(), other.num_of_produced);
+      if (isValidValue(fields()[1], other.total)) {
+        this.total = data().deepCopy(fields()[1].schema(), other.total);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.avg_of_produced)) {
-        this.avg_of_produced = data().deepCopy(fields()[2].schema(), other.avg_of_produced);
+      if (isValidValue(fields()[2], other.num_of_produced)) {
+        this.num_of_produced = data().deepCopy(fields()[2].schema(), other.num_of_produced);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.datetime)) {
-        this.datetime = data().deepCopy(fields()[3].schema(), other.datetime);
+      if (isValidValue(fields()[3], other.avg_of_produced)) {
+        this.avg_of_produced = data().deepCopy(fields()[3].schema(), other.avg_of_produced);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
+      }
+      if (isValidValue(fields()[4], other.datetime)) {
+        this.datetime = data().deepCopy(fields()[4].schema(), other.datetime);
+        fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
     }
 
@@ -292,22 +322,70 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
      */
     private Builder(com.greatit.demo.avro.HappinessAverage other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.total)) {
-        this.total = data().deepCopy(fields()[0].schema(), other.total);
+      if (isValidValue(fields()[0], other.groupid)) {
+        this.groupid = data().deepCopy(fields()[0].schema(), other.groupid);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.num_of_produced)) {
-        this.num_of_produced = data().deepCopy(fields()[1].schema(), other.num_of_produced);
+      if (isValidValue(fields()[1], other.total)) {
+        this.total = data().deepCopy(fields()[1].schema(), other.total);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.avg_of_produced)) {
-        this.avg_of_produced = data().deepCopy(fields()[2].schema(), other.avg_of_produced);
+      if (isValidValue(fields()[2], other.num_of_produced)) {
+        this.num_of_produced = data().deepCopy(fields()[2].schema(), other.num_of_produced);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.datetime)) {
-        this.datetime = data().deepCopy(fields()[3].schema(), other.datetime);
+      if (isValidValue(fields()[3], other.avg_of_produced)) {
+        this.avg_of_produced = data().deepCopy(fields()[3].schema(), other.avg_of_produced);
         fieldSetFlags()[3] = true;
       }
+      if (isValidValue(fields()[4], other.datetime)) {
+        this.datetime = data().deepCopy(fields()[4].schema(), other.datetime);
+        fieldSetFlags()[4] = true;
+      }
+    }
+
+    /**
+      * Gets the value of the 'groupid' field.
+      * GroupId of a happiness item 
+      * @return The value.
+      */
+    public java.lang.String getGroupid() {
+      return groupid;
+    }
+
+
+    /**
+      * Sets the value of the 'groupid' field.
+      * GroupId of a happiness item 
+      * @param value The value of 'groupid'.
+      * @return This builder.
+      */
+    public com.greatit.demo.avro.HappinessAverage.Builder setGroupid(java.lang.String value) {
+      validate(fields()[0], value);
+      this.groupid = value;
+      fieldSetFlags()[0] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'groupid' field has been set.
+      * GroupId of a happiness item 
+      * @return True if the 'groupid' field has been set, false otherwise.
+      */
+    public boolean hasGroupid() {
+      return fieldSetFlags()[0];
+    }
+
+
+    /**
+      * Clears the value of the 'groupid' field.
+      * GroupId of a happiness item 
+      * @return This builder.
+      */
+    public com.greatit.demo.avro.HappinessAverage.Builder clearGroupid() {
+      groupid = null;
+      fieldSetFlags()[0] = false;
+      return this;
     }
 
     /**
@@ -327,9 +405,9 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessAverage.Builder setTotal(double value) {
-      validate(fields()[0], value);
+      validate(fields()[1], value);
       this.total = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -339,7 +417,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return True if the 'total' field has been set, false otherwise.
       */
     public boolean hasTotal() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[1];
     }
 
 
@@ -349,7 +427,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessAverage.Builder clearTotal() {
-      fieldSetFlags()[0] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -370,9 +448,9 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessAverage.Builder setNumOfProduced(long value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.num_of_produced = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -382,7 +460,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return True if the 'num_of_produced' field has been set, false otherwise.
       */
     public boolean hasNumOfProduced() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -392,7 +470,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessAverage.Builder clearNumOfProduced() {
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -413,9 +491,9 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessAverage.Builder setAvgOfProduced(double value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.avg_of_produced = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -425,7 +503,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return True if the 'avg_of_produced' field has been set, false otherwise.
       */
     public boolean hasAvgOfProduced() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
 
 
@@ -435,7 +513,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessAverage.Builder clearAvgOfProduced() {
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -456,9 +534,9 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessAverage.Builder setDatetime(java.lang.String value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.datetime = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -468,7 +546,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       * @return True if the 'datetime' field has been set, false otherwise.
       */
     public boolean hasDatetime() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
 
 
@@ -479,7 +557,7 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       */
     public com.greatit.demo.avro.HappinessAverage.Builder clearDatetime() {
       datetime = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -488,10 +566,11 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
     public HappinessAverage build() {
       try {
         HappinessAverage record = new HappinessAverage();
-        record.total = fieldSetFlags()[0] ? this.total : (java.lang.Double) defaultValue(fields()[0]);
-        record.num_of_produced = fieldSetFlags()[1] ? this.num_of_produced : (java.lang.Long) defaultValue(fields()[1]);
-        record.avg_of_produced = fieldSetFlags()[2] ? this.avg_of_produced : (java.lang.Double) defaultValue(fields()[2]);
-        record.datetime = fieldSetFlags()[3] ? this.datetime : (java.lang.String) defaultValue(fields()[3]);
+        record.groupid = fieldSetFlags()[0] ? this.groupid : (java.lang.String) defaultValue(fields()[0]);
+        record.total = fieldSetFlags()[1] ? this.total : (java.lang.Double) defaultValue(fields()[1]);
+        record.num_of_produced = fieldSetFlags()[2] ? this.num_of_produced : (java.lang.Long) defaultValue(fields()[2]);
+        record.avg_of_produced = fieldSetFlags()[3] ? this.avg_of_produced : (java.lang.Double) defaultValue(fields()[3]);
+        record.datetime = fieldSetFlags()[4] ? this.datetime : (java.lang.String) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -524,6 +603,14 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
+    if (this.groupid == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.groupid);
+    }
+
     out.writeDouble(this.total);
 
     out.writeLong(this.num_of_produced);
@@ -545,6 +632,13 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.groupid = null;
+      } else {
+        this.groupid = in.readString();
+      }
+
       this.total = in.readDouble();
 
       this.num_of_produced = in.readLong();
@@ -559,21 +653,30 @@ public class HappinessAverage extends org.apache.avro.specific.SpecificRecordBas
       }
 
     } else {
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < 5; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.total = in.readDouble();
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.groupid = null;
+          } else {
+            this.groupid = in.readString();
+          }
           break;
 
         case 1:
-          this.num_of_produced = in.readLong();
+          this.total = in.readDouble();
           break;
 
         case 2:
-          this.avg_of_produced = in.readDouble();
+          this.num_of_produced = in.readLong();
           break;
 
         case 3:
+          this.avg_of_produced = in.readDouble();
+          break;
+
+        case 4:
           if (in.readIndex() != 1) {
             in.readNull();
             this.datetime = null;

@@ -5,6 +5,18 @@
   "doc": "Item produced by the Happiness machine",
   "fields": [
     {
+      "name": "groupid",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "avro.java.string": "String"
+        }
+      ],
+      "default": null,
+      "doc": "GroupId of a happiness item "
+    },
+    {
       "name": "id",
       "type": {
         "type": "string",

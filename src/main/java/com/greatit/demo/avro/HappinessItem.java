@@ -15,10 +15,10 @@ import org.apache.avro.message.SchemaStore;
 /** Item produced by the Happiness machine */
 @org.apache.avro.specific.AvroGenerated
 public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6935476231958936052L;
+  private static final long serialVersionUID = -9191041719296676481L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"HappinessItem\",\"namespace\":\"com.greatit.demo.avro\",\"doc\":\"Item produced by the Happiness machine\",\"fields\":[{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"doc\":\"Id of a happiness item \"},{\"name\":\"datetime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"doc\":\"Time when happiness was made\"},{\"name\":\"level\",\"type\":\"int\",\"doc\":\"How strong this happiness is?\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"HappinessItem\",\"namespace\":\"com.greatit.demo.avro\",\"doc\":\"Item produced by the Happiness machine\",\"fields\":[{\"name\":\"groupid\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}],\"doc\":\"GroupId of a happiness item \",\"default\":null},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"doc\":\"Id of a happiness item \"},{\"name\":\"datetime\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"doc\":\"Time when happiness was made\"},{\"name\":\"level\",\"type\":\"int\",\"doc\":\"How strong this happiness is?\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -74,6 +74,8 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
     return DECODER.decode(b);
   }
 
+  /** GroupId of a happiness item  */
+  private java.lang.String groupid;
   /** Id of a happiness item  */
   private java.lang.String id;
   /** Time when happiness was made */
@@ -90,11 +92,13 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
 
   /**
    * All-args constructor.
+   * @param groupid GroupId of a happiness item 
    * @param id Id of a happiness item 
    * @param datetime Time when happiness was made
    * @param level How strong this happiness is?
    */
-  public HappinessItem(java.lang.String id, java.lang.String datetime, java.lang.Integer level) {
+  public HappinessItem(java.lang.String groupid, java.lang.String id, java.lang.String datetime, java.lang.Integer level) {
+    this.groupid = groupid;
     this.id = id;
     this.datetime = datetime;
     this.level = level;
@@ -110,9 +114,10 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
   @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return id;
-    case 1: return datetime;
-    case 2: return level;
+    case 0: return groupid;
+    case 1: return id;
+    case 2: return datetime;
+    case 3: return level;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -122,11 +127,30 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: id = value$ != null ? value$.toString() : null; break;
-    case 1: datetime = value$ != null ? value$.toString() : null; break;
-    case 2: level = (java.lang.Integer)value$; break;
+    case 0: groupid = value$ != null ? value$.toString() : null; break;
+    case 1: id = value$ != null ? value$.toString() : null; break;
+    case 2: datetime = value$ != null ? value$.toString() : null; break;
+    case 3: level = (java.lang.Integer)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  /**
+   * Gets the value of the 'groupid' field.
+   * @return GroupId of a happiness item 
+   */
+  public java.lang.String getGroupid() {
+    return groupid;
+  }
+
+
+  /**
+   * Sets the value of the 'groupid' field.
+   * GroupId of a happiness item 
+   * @param value the value to set.
+   */
+  public void setGroupid(java.lang.String value) {
+    this.groupid = value;
   }
 
   /**
@@ -224,6 +248,8 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<HappinessItem>
     implements org.apache.avro.data.RecordBuilder<HappinessItem> {
 
+    /** GroupId of a happiness item  */
+    private java.lang.String groupid;
     /** Id of a happiness item  */
     private java.lang.String id;
     /** Time when happiness was made */
@@ -242,17 +268,21 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
      */
     private Builder(com.greatit.demo.avro.HappinessItem.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.id)) {
-        this.id = data().deepCopy(fields()[0].schema(), other.id);
+      if (isValidValue(fields()[0], other.groupid)) {
+        this.groupid = data().deepCopy(fields()[0].schema(), other.groupid);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.datetime)) {
-        this.datetime = data().deepCopy(fields()[1].schema(), other.datetime);
+      if (isValidValue(fields()[1], other.id)) {
+        this.id = data().deepCopy(fields()[1].schema(), other.id);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.level)) {
-        this.level = data().deepCopy(fields()[2].schema(), other.level);
+      if (isValidValue(fields()[2], other.datetime)) {
+        this.datetime = data().deepCopy(fields()[2].schema(), other.datetime);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
+      }
+      if (isValidValue(fields()[3], other.level)) {
+        this.level = data().deepCopy(fields()[3].schema(), other.level);
+        fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
     }
 
@@ -262,18 +292,66 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
      */
     private Builder(com.greatit.demo.avro.HappinessItem other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.id)) {
-        this.id = data().deepCopy(fields()[0].schema(), other.id);
+      if (isValidValue(fields()[0], other.groupid)) {
+        this.groupid = data().deepCopy(fields()[0].schema(), other.groupid);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.datetime)) {
-        this.datetime = data().deepCopy(fields()[1].schema(), other.datetime);
+      if (isValidValue(fields()[1], other.id)) {
+        this.id = data().deepCopy(fields()[1].schema(), other.id);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.level)) {
-        this.level = data().deepCopy(fields()[2].schema(), other.level);
+      if (isValidValue(fields()[2], other.datetime)) {
+        this.datetime = data().deepCopy(fields()[2].schema(), other.datetime);
         fieldSetFlags()[2] = true;
       }
+      if (isValidValue(fields()[3], other.level)) {
+        this.level = data().deepCopy(fields()[3].schema(), other.level);
+        fieldSetFlags()[3] = true;
+      }
+    }
+
+    /**
+      * Gets the value of the 'groupid' field.
+      * GroupId of a happiness item 
+      * @return The value.
+      */
+    public java.lang.String getGroupid() {
+      return groupid;
+    }
+
+
+    /**
+      * Sets the value of the 'groupid' field.
+      * GroupId of a happiness item 
+      * @param value The value of 'groupid'.
+      * @return This builder.
+      */
+    public com.greatit.demo.avro.HappinessItem.Builder setGroupid(java.lang.String value) {
+      validate(fields()[0], value);
+      this.groupid = value;
+      fieldSetFlags()[0] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'groupid' field has been set.
+      * GroupId of a happiness item 
+      * @return True if the 'groupid' field has been set, false otherwise.
+      */
+    public boolean hasGroupid() {
+      return fieldSetFlags()[0];
+    }
+
+
+    /**
+      * Clears the value of the 'groupid' field.
+      * GroupId of a happiness item 
+      * @return This builder.
+      */
+    public com.greatit.demo.avro.HappinessItem.Builder clearGroupid() {
+      groupid = null;
+      fieldSetFlags()[0] = false;
+      return this;
     }
 
     /**
@@ -293,9 +371,9 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessItem.Builder setId(java.lang.String value) {
-      validate(fields()[0], value);
+      validate(fields()[1], value);
       this.id = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -305,7 +383,7 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
       * @return True if the 'id' field has been set, false otherwise.
       */
     public boolean hasId() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[1];
     }
 
 
@@ -316,7 +394,7 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
       */
     public com.greatit.demo.avro.HappinessItem.Builder clearId() {
       id = null;
-      fieldSetFlags()[0] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -337,9 +415,9 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessItem.Builder setDatetime(java.lang.String value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.datetime = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -349,7 +427,7 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
       * @return True if the 'datetime' field has been set, false otherwise.
       */
     public boolean hasDatetime() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -360,7 +438,7 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
       */
     public com.greatit.demo.avro.HappinessItem.Builder clearDatetime() {
       datetime = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -381,9 +459,9 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessItem.Builder setLevel(int value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.level = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -393,7 +471,7 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
       * @return True if the 'level' field has been set, false otherwise.
       */
     public boolean hasLevel() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
 
 
@@ -403,7 +481,7 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
       * @return This builder.
       */
     public com.greatit.demo.avro.HappinessItem.Builder clearLevel() {
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -412,9 +490,10 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
     public HappinessItem build() {
       try {
         HappinessItem record = new HappinessItem();
-        record.id = fieldSetFlags()[0] ? this.id : (java.lang.String) defaultValue(fields()[0]);
-        record.datetime = fieldSetFlags()[1] ? this.datetime : (java.lang.String) defaultValue(fields()[1]);
-        record.level = fieldSetFlags()[2] ? this.level : (java.lang.Integer) defaultValue(fields()[2]);
+        record.groupid = fieldSetFlags()[0] ? this.groupid : (java.lang.String) defaultValue(fields()[0]);
+        record.id = fieldSetFlags()[1] ? this.id : (java.lang.String) defaultValue(fields()[1]);
+        record.datetime = fieldSetFlags()[2] ? this.datetime : (java.lang.String) defaultValue(fields()[2]);
+        record.level = fieldSetFlags()[3] ? this.level : (java.lang.Integer) defaultValue(fields()[3]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -447,6 +526,14 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
+    if (this.groupid == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.groupid);
+    }
+
     out.writeString(this.id);
 
     out.writeString(this.datetime);
@@ -460,6 +547,13 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.groupid = null;
+      } else {
+        this.groupid = in.readString();
+      }
+
       this.id = in.readString();
 
       this.datetime = in.readString();
@@ -467,17 +561,26 @@ public class HappinessItem extends org.apache.avro.specific.SpecificRecordBase i
       this.level = in.readInt();
 
     } else {
-      for (int i = 0; i < 3; i++) {
+      for (int i = 0; i < 4; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.id = in.readString();
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.groupid = null;
+          } else {
+            this.groupid = in.readString();
+          }
           break;
 
         case 1:
-          this.datetime = in.readString();
+          this.id = in.readString();
           break;
 
         case 2:
+          this.datetime = in.readString();
+          break;
+
+        case 3:
           this.level = in.readInt();
           break;
 

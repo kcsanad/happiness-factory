@@ -1,13 +1,10 @@
 package com.greatit.demo.service;
 
-import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StoreQueryParameters;
-import org.apache.kafka.streams.StreamsMetadata;
 import org.apache.kafka.streams.state.QueryableStoreTypes;
 import org.apache.kafka.streams.state.ReadOnlyKeyValueStore;
 import org.jvnet.hk2.annotations.Service;
-import org.rocksdb.MutableOptionKey.ValueType;
 
 import com.google.gson.Gson;
 import com.greatit.demo.avro.HappinessAverage;

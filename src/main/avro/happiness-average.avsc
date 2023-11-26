@@ -4,6 +4,18 @@
   "namespace": "com.greatit.demo.avro",
   "doc": "Average value of items produced by Happiness machine in time window",
   "fields": [
+    {
+      "name": "groupid",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "avro.java.string": "String"
+        }
+      ],
+      "default": null,
+      "doc": "GroupId of a happiness item "
+    },
       {
       "name": "total",
       "type": "double",
